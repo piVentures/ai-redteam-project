@@ -1,0 +1,3 @@
+from .net import SmallCNN, CLASSES, NUM_CLASSES, CIFAR_MEAN, CIFAR_STD
+
+__all__ = ["SmallCNN", "CLASSES", "NUM_CLASSES", "CIFAR_MEAN", "CIFAR_STD"]

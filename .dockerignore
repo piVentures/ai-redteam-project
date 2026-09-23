@@ -1,0 +1,17 @@
+venv/
+.git/
+.gitignore
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+results/
+report/
+video/
+colab/
+data/
+scripts/
+docs/
+*.md
+!requirements.txt
+.env
+.DS_Store

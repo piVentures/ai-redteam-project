@@ -1,0 +1,33 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.pytest_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Data (downloaded at runtime)
+data/cifar-10-batches-py/
+data/cifar-10-python.tar.gz
+
+# Logs (runtime artifact)
+logs/*.jsonl
+logs/*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets
+.env
+*.env.local
+
+# Editor
+.vscode/
+.idea/
+
+# Note: model/artifacts/*.pt and *.safetensors are NOT ignored.
+# They are force-added to git for reproducibility.
