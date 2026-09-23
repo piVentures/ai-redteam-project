@@ -1,0 +1,122 @@
+[
+  {
+    "epoch": 1,
+    "loss": 0.8522,
+    "val_accuracy": 0.7645,
+    "elapsed_seconds": 41.8
+  },
+  {
+    "epoch": 2,
+    "loss": 0.617,
+    "val_accuracy": 0.7995,
+    "elapsed_seconds": 83.3
+  },
+  {
+    "epoch": 3,
+    "loss": 0.5207,
+    "val_accuracy": 0.818,
+    "elapsed_seconds": 124.8
+  },
+  {
+    "epoch": 4,
+    "loss": 0.471,
+    "val_accuracy": 0.8345,
+    "elapsed_seconds": 166.5
+  },
+  {
+    "epoch": 5,
+    "loss": 0.4015,
+    "val_accuracy": 0.836,
+    "elapsed_seconds": 208.2
+  },
+  {
+    "epoch": 6,
+    "loss": 0.3648,
+    "val_accuracy": 0.859,
+    "elapsed_seconds": 250.6
+  },
+  {
+    "epoch": 7,
+    "loss": 0.3137,
+    "val_accuracy": 0.8495,
+    "elapsed_seconds": 293.3
+  },
+  {
+    "epoch": 8,
+    "loss": 0.2666,
+    "val_accuracy": 0.863,
+    "elapsed_seconds": 335.9
+  },
+  {
+    "epoch": 9,
+    "loss": 0.2275,
+    "val_accuracy": 0.8655,
+    "elapsed_seconds": 377.9
+  },
+  {
+    "epoch": 10,
+    "loss": 0.1953,
+    "val_accuracy": 0.8645,
+    "elapsed_seconds": 420.0
+  },
+  {
+    "epoch": 11,
+    "loss": 0.1617,
+    "val_accuracy": 0.8645,
+    "elapsed_seconds": 462.0
+  },
+  {
+    "epoch": 12,
+    "loss": 0.133,
+    "val_accuracy": 0.861,
+    "elapsed_seconds": 504.2
+  },
+  {
+    "epoch": 13,
+    "loss": 0.1063,
+    "val_accuracy": 0.871,
+    "elapsed_seconds": 546.0
+  },
+  {
+    "epoch": 14,
+    "loss": 0.09,
+    "val_accuracy": 0.8675,
+    "elapsed_seconds": 587.9
+  },
+  {
+    "epoch": 15,
+    "loss": 0.0729,
+    "val_accuracy": 0.869,
+    "elapsed_seconds": 630.0
+  },
+  {
+    "epoch": 16,
+    "loss": 0.0611,
+    "val_accuracy": 0.863,
+    "elapsed_seconds": 672.9
+  },
+  {
+    "epoch": 17,
+    "loss": 0.0509,
+    "val_accuracy": 0.8665,
+    "elapsed_seconds": 715.6
+  },
+  {
+    "epoch": 18,
+    "loss": 0.0473,
+    "val_accuracy": 0.864,
+    "elapsed_seconds": 757.4
+  },
+  {
+    "epoch": 19,
+    "loss": 0.0438,
+    "val_accuracy": 0.868,
+    "elapsed_seconds": 799.6
+  },
+  {
+    "epoch": 20,
+    "loss": 0.0419,
+    "val_accuracy": 0.868,
+    "elapsed_seconds": 841.8
+  }
+]
