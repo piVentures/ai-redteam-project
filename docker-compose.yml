@@ -1,0 +1,55 @@
+services:
+  api-vuln:
+    build: .
+    container_name: redteam-api-vuln
+    environment:
+      - SECURITY_MODE=vulnerable
+      - MODEL_PATH=model/artifacts/baseline.pt
+      - LOG_DIR=logs
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./model/artifacts:/srv/model/artifacts:ro
+      - ./logs:/srv/logs
+      - ./results:/srv/results
+
+  api-hardened:
+    build: .
+    container_name: redteam-api-hardened
+    environment:
+      - SECURITY_MODE=hardened
+      - MODEL_PATH=model/artifacts/baseline.pt
+      - LOG_DIR=logs
+      - API_KEY=${API_KEY:-dev-local-key-change-me}
+    ports:
+      - "8001:8000"
+    volumes:
+      - ./model/artifacts:/srv/model/artifacts:ro
+      - ./logs:/srv/logs
+      - ./results:/srv/results
+
+  detector:
+    build: .
+    container_name: redteam-detector
+    command: ["python", "-m", "interfaces.detector_main"]
+    working_dir: /srv
+    environment:
+      - PREDICTIONS_LOG=logs/predictions.jsonl
+      - ALERTS_LOG=results/alerts.jsonl
+    volumes:
+      - ./logs:/srv/logs
+      - ./results:/srv/results
+    depends_on:
+      - api-vuln
+
+  alerts-api:
+    build: .
+    container_name: redteam-alerts-api
+    command: ["uvicorn", "interfaces.alerts_main:app", "--host", "0.0.0.0", "--port", "8002"]
+    working_dir: /srv
+    ports:
+      - "8002:8002"
+    volumes:
+      - ./results:/srv/results
+    depends_on:
+      - detector
