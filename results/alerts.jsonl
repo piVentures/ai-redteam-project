@@ -1,0 +1,9 @@
+{"rule": "mia_confidence_sweep", "atlas": "AML.T0025", "ip": "172.19.0.1", "ts": 1790184437.6403246}
+{"rule": "extraction_volume", "atlas": "AML.T0024", "ip": "172.19.0.1", "count_last_60s": 41, "ts": 1790184439.1427188}
+{"rule": "adversarial_noise_input", "atlas": "AML.T0043", "ip": "172.19.0.1", "noise_score": 46.850807189941406, "ts": 1790184485.7154772}
+{"rule": "mia_confidence_sweep", "atlas": "AML.T0025", "ip": "172.19.0.1", "ts": 1790184497.7327373}
+{"rule": "extraction_volume", "atlas": "AML.T0024", "ip": "172.19.0.1", "count_last_60s": 1724, "ts": 1790184499.2353694}
+{"rule": "mia_confidence_sweep", "atlas": "AML.T0025", "ip": "172.19.0.1", "ts": 1790184586.3364441}
+{"rule": "extraction_volume", "atlas": "AML.T0024", "ip": "172.19.0.1", "count_last_60s": 41, "ts": 1790184587.3384168}
+{"rule": "mia_confidence_sweep", "atlas": "AML.T0025", "ip": "172.19.0.1", "ts": 1790184677.1917796}
+{"rule": "extraction_volume", "atlas": "AML.T0024", "ip": "172.19.0.1", "count_last_60s": 41, "ts": 1790184678.1946602}
