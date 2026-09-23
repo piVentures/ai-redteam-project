@@ -10,10 +10,16 @@ class Prediction:
     probabilities: Optional[Dict[str, float]] = None
 
     def to_dict_vulnerable(self) -> dict:
-        return {"class": self.class_name, "probabilities": self.probabilities}
+        return {
+            "class": self.class_name,
+            "probabilities": self.probabilities,
+        }
 
     def to_dict_hardened(self) -> dict:
-        return {"class": self.class_name, "confidence": self.confidence}
+        return {
+            "class": self.class_name,
+            "confidence": round(self.confidence, 2),
+        }
 
 
 @dataclass
