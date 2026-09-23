@@ -12,6 +12,13 @@ services:
       - ./model/artifacts:/srv/model/artifacts:ro
       - ./logs:/srv/logs
       - ./results:/srv/results
+      # Bind mounts for hot reload — code changes apply on restart
+      - ./domain:/srv/domain:ro
+      - ./services:/srv/services:ro
+      - ./usecases:/srv/usecases:ro
+      - ./adapters:/srv/adapters:ro
+      - ./interfaces:/srv/interfaces:ro
+      - ./defense:/srv/defense:ro
 
   api-hardened:
     build: .
@@ -20,13 +27,19 @@ services:
       - SECURITY_MODE=hardened
       - MODEL_PATH=model/artifacts/baseline.pt
       - LOG_DIR=logs
-      - API_KEY=${API_KEY:-dev-local-key-change-me}
+      - API_KEY=dev-local-key-change-me
     ports:
       - "8001:8000"
     volumes:
       - ./model/artifacts:/srv/model/artifacts:ro
       - ./logs:/srv/logs
       - ./results:/srv/results
+      - ./domain:/srv/domain:ro
+      - ./services:/srv/services:ro
+      - ./usecases:/srv/usecases:ro
+      - ./adapters:/srv/adapters:ro
+      - ./interfaces:/srv/interfaces:ro
+      - ./defense:/srv/defense:ro
 
   detector:
     build: .
@@ -39,6 +52,12 @@ services:
     volumes:
       - ./logs:/srv/logs
       - ./results:/srv/results
+      - ./domain:/srv/domain:ro
+      - ./services:/srv/services:ro
+      - ./usecases:/srv/usecases:ro
+      - ./adapters:/srv/adapters:ro
+      - ./interfaces:/srv/interfaces:ro
+      - ./defense:/srv/defense:ro
     depends_on:
       - api-vuln
 
@@ -51,5 +70,11 @@ services:
       - "8002:8002"
     volumes:
       - ./results:/srv/results
+      - ./domain:/srv/domain:ro
+      - ./services:/srv/services:ro
+      - ./usecases:/srv/usecases:ro
+      - ./adapters:/srv/adapters:ro
+      - ./interfaces:/srv/interfaces:ro
+      - ./defense:/srv/defense:ro
     depends_on:
       - detector
