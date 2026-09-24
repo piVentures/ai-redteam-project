@@ -1,0 +1,7 @@
+{
+  "finding": "root_container",
+  "atlas": "AML.T0000",
+  "whoami": "root",
+  "id": "uid=0(root) gid=0(root) groups=0(root)",
+  "notes": "The container runs as root. A compromise of the FastAPI process (e.g., via unsafe torch.load) inherits container-root. A non-root user would limit the blast radius."
+}

@@ -1,0 +1,7 @@
+{
+  "finding": "no_resource_limits",
+  "atlas": "\u2014",
+  "memory_limit": 1073741824,
+  "cpu_quota": 0,
+  "notes": "The container has no memory limit and no CPU quota. A malicious client can exhaust host resources by sending large or numerous requests, causing a denial of service for other containers or the host itself."
+}

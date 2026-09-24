@@ -1,0 +1,79 @@
+{
+  "finding": "volume_mounts_exposed",
+  "atlas": "AML.T0000",
+  "mounts": [
+    {
+      "Type": "bind",
+      "Source": "/home/kira/github/insa/ai-redteam-project/adapters",
+      "Destination": "/srv/adapters",
+      "Mode": "ro",
+      "RW": false,
+      "Propagation": "rprivate"
+    },
+    {
+      "Type": "bind",
+      "Source": "/home/kira/github/insa/ai-redteam-project/defense",
+      "Destination": "/srv/defense",
+      "Mode": "ro",
+      "RW": false,
+      "Propagation": "rprivate"
+    },
+    {
+      "Type": "bind",
+      "Source": "/home/kira/github/insa/ai-redteam-project/domain",
+      "Destination": "/srv/domain",
+      "Mode": "ro",
+      "RW": false,
+      "Propagation": "rprivate"
+    },
+    {
+      "Type": "bind",
+      "Source": "/home/kira/github/insa/ai-redteam-project/interfaces",
+      "Destination": "/srv/interfaces",
+      "Mode": "ro",
+      "RW": false,
+      "Propagation": "rprivate"
+    },
+    {
+      "Type": "bind",
+      "Source": "/home/kira/github/insa/ai-redteam-project/logs",
+      "Destination": "/srv/logs",
+      "Mode": "rw",
+      "RW": true,
+      "Propagation": "rprivate"
+    },
+    {
+      "Type": "bind",
+      "Source": "/home/kira/github/insa/ai-redteam-project/results",
+      "Destination": "/srv/results",
+      "Mode": "rw",
+      "RW": true,
+      "Propagation": "rprivate"
+    },
+    {
+      "Type": "bind",
+      "Source": "/home/kira/github/insa/ai-redteam-project/services",
+      "Destination": "/srv/services",
+      "Mode": "ro",
+      "RW": false,
+      "Propagation": "rprivate"
+    },
+    {
+      "Type": "bind",
+      "Source": "/home/kira/github/insa/ai-redteam-project/usecases",
+      "Destination": "/srv/usecases",
+      "Mode": "ro",
+      "RW": false,
+      "Propagation": "rprivate"
+    },
+    {
+      "Type": "bind",
+      "Source": "/home/kira/github/insa/ai-redteam-project/model/artifacts",
+      "Destination": "/srv/model/artifacts",
+      "Mode": "ro",
+      "RW": false,
+      "Propagation": "rprivate"
+    }
+  ],
+  "notes": "Logs and results are mounted from the host. An attacker who achieves container compromise can tamper with logs or write to results. The model directory is read-only, which limits some attacks."
+}

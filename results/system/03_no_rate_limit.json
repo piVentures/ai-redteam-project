@@ -1,0 +1,11 @@
+{
+  "finding": "no_rate_limit_vulnerable",
+  "atlas": "AML.T0024",
+  "requests_sent": 200,
+  "ok": 200,
+  "rate_limited": 0,
+  "errors": 0,
+  "elapsed_seconds": 6.08,
+  "requests_per_second": 32.9,
+  "notes": "200 requests sent in 6.1s at 32.9 req/s. 200 succeeded, 0 were rate-limited. The vulnerable API has no rate limit."
+}
