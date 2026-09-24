@@ -1,0 +1,179 @@
+[
+  {
+    "finding": "model_info_leak",
+    "atlas": "AML.T0007",
+    "vulnerable": {
+      "status": 200,
+      "body": {
+        "architecture": "SmallCNN(\n  (features): Sequential(\n    (0): Conv2d(3, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))\n    (1): ReLU()\n    (2): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)\n    (3): Conv2d(32, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))\n    (4): ReLU()\n    (5): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)\n    (6): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))\n    (7): ReLU()\n    (8): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)\n  )\n  (classifier): Sequential(\n    (0): Flatten(start_dim=1, end_dim=-1)\n    (1): Linear(in_features=2048, out_features=256, bias=True)\n    (2): ReLU()\n    (3): Dropout(p=0.3, inplace=False)\n    (4): Linear(in_features=256, out_features=4, bias=True)\n  )\n)",
+        "classes": [
+          "airplane",
+          "automobile",
+          "bird",
+          "cat"
+        ],
+        "torch_version": "2.1.2+cpu",
+        "num_params": 618820,
+        "model_path": "model/artifacts/baseline.pt"
+      }
+    },
+    "hardened": {
+      "status": 404,
+      "body": "{\"detail\":\"Not found\"}"
+    },
+    "notes": "Vulnerable endpoint returns full architecture, class list, parameter count, and torch version. Hardened endpoint returns 404."
+  },
+  {
+    "finding": "verbose_error_traces",
+    "atlas": "AML.T0007",
+    "vulnerable": {
+      "status": 500,
+      "body": "{\"error\":\"cannot identify image file <_io.BytesIO object at 0x7611fdfa1a30>\",\"trace\":\"Traceback (most recent call last):\\n  File \\\"/srv/adapters/http.py\\\", line 53, in predict_endpoint\\n    prediction = serve_prediction(model, raw, client_ip, _log)\\n  File \\\"/srv/usecases/serve_prediction.py\\\", line 10, in serve_prediction\\n    noise = noise_score_from_bytes(image_bytes)\\n  File \\\"/srv/services/preprocessing.py\\\", line 24, in noise_score_from_bytes\\n    arr = np.array(Image.open(io.BytesIO(image_bytes)).convert(\\\"L\\\"), dtype=np.float32)\\n  File \\\"/usr/local/lib/python3.10/site-packages/PIL/Image.py\\\", line 3339, in open\\n    raise UnidentifiedImageError(msg)\\nPIL.UnidentifiedImageError: cannot identify image file <_io.BytesIO object at 0x7611fdfa1a30>\\n\"}"
+    },
+    "hardened": {
+      "status": 400,
+      "body": "{\"detail\":\"Invalid image\"}"
+    },
+    "notes": "Vulnerable returns a full stack trace with file paths and library versions. Hardened returns a generic error."
+  },
+  {
+    "finding": "no_rate_limit_vulnerable",
+    "atlas": "AML.T0024",
+    "requests_sent": 200,
+    "ok": 200,
+    "rate_limited": 0,
+    "errors": 0,
+    "elapsed_seconds": 6.08,
+    "requests_per_second": 32.9,
+    "notes": "200 requests sent in 6.1s at 32.9 req/s. 200 succeeded, 0 were rate-limited. The vulnerable API has no rate limit."
+  },
+  {
+    "finding": "auto_docs_exposed",
+    "atlas": "AML.T0007",
+    "docs_status": 200,
+    "docs_length": 952,
+    "openapi_endpoints": [
+      "/health",
+      "/model-info",
+      "/predict"
+    ],
+    "notes": "FastAPI auto-generates /docs and /openapi.json. These are disabled in hardened mode but exposed on the vulnerable API. An attacker can map the entire API surface without any guesswork."
+  },
+  {
+    "finding": "env_var_secrets",
+    "atlas": "AML.T0010",
+    "raw": [
+      "LOG_DIR=logs",
+      "API_KEY=dev-local-key-change-me",
+      "SECURITY_MODE=hardened",
+      "MODEL_PATH=model/artifacts/baseline.pt",
+      "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG=C.UTF-8",
+      "GPG_KEY=A035C8C19219BA821ECEA86B64E628F8D684696D",
+      "PYTHON_VERSION=3.10.21",
+      "PYTHON_SHA256=a0da1e72132e950154eca0f6f47d5db828454700de20e5113667940d81e0db04"
+    ],
+    "notes": "The API key is exposed in plaintext in the container's environment. Any process with access to the Docker daemon (or the container) can read it. In production this should come from a secret store."
+  },
+  {
+    "finding": "root_container",
+    "atlas": "AML.T0000",
+    "whoami": "root",
+    "id": "uid=0(root) gid=0(root) groups=0(root)",
+    "notes": "The container runs as root. A compromise of the FastAPI process (e.g., via unsafe torch.load) inherits container-root. A non-root user would limit the blast radius."
+  },
+  {
+    "finding": "volume_mounts_exposed",
+    "atlas": "AML.T0000",
+    "mounts": [
+      {
+        "Type": "bind",
+        "Source": "/home/kira/github/insa/ai-redteam-project/adapters",
+        "Destination": "/srv/adapters",
+        "Mode": "ro",
+        "RW": false,
+        "Propagation": "rprivate"
+      },
+      {
+        "Type": "bind",
+        "Source": "/home/kira/github/insa/ai-redteam-project/defense",
+        "Destination": "/srv/defense",
+        "Mode": "ro",
+        "RW": false,
+        "Propagation": "rprivate"
+      },
+      {
+        "Type": "bind",
+        "Source": "/home/kira/github/insa/ai-redteam-project/domain",
+        "Destination": "/srv/domain",
+        "Mode": "ro",
+        "RW": false,
+        "Propagation": "rprivate"
+      },
+      {
+        "Type": "bind",
+        "Source": "/home/kira/github/insa/ai-redteam-project/interfaces",
+        "Destination": "/srv/interfaces",
+        "Mode": "ro",
+        "RW": false,
+        "Propagation": "rprivate"
+      },
+      {
+        "Type": "bind",
+        "Source": "/home/kira/github/insa/ai-redteam-project/logs",
+        "Destination": "/srv/logs",
+        "Mode": "rw",
+        "RW": true,
+        "Propagation": "rprivate"
+      },
+      {
+        "Type": "bind",
+        "Source": "/home/kira/github/insa/ai-redteam-project/results",
+        "Destination": "/srv/results",
+        "Mode": "rw",
+        "RW": true,
+        "Propagation": "rprivate"
+      },
+      {
+        "Type": "bind",
+        "Source": "/home/kira/github/insa/ai-redteam-project/services",
+        "Destination": "/srv/services",
+        "Mode": "ro",
+        "RW": false,
+        "Propagation": "rprivate"
+      },
+      {
+        "Type": "bind",
+        "Source": "/home/kira/github/insa/ai-redteam-project/usecases",
+        "Destination": "/srv/usecases",
+        "Mode": "ro",
+        "RW": false,
+        "Propagation": "rprivate"
+      },
+      {
+        "Type": "bind",
+        "Source": "/home/kira/github/insa/ai-redteam-project/model/artifacts",
+        "Destination": "/srv/model/artifacts",
+        "Mode": "ro",
+        "RW": false,
+        "Propagation": "rprivate"
+      }
+    ],
+    "notes": "Logs and results are mounted from the host. An attacker who achieves container compromise can tamper with logs or write to results. The model directory is read-only, which limits some attacks."
+  },
+  {
+    "finding": "no_resource_limits",
+    "atlas": "\u2014",
+    "memory_limit": 1073741824,
+    "cpu_quota": 0,
+    "notes": "The container has no memory limit and no CPU quota. A malicious client can exhaust host resources by sending large or numerous requests, causing a denial of service for other containers or the host itself."
+  },
+  {
+    "finding": "cors_behavior",
+    "atlas": "AML.T0000",
+    "origin_sent": "http://localhost:3000",
+    "response_status": 405,
+    "access_control_allow_origin": "not set",
+    "notes": "The vulnerable API does not set CORS headers explicitly. FastAPI's default allows the browser to make requests from any origin. A malicious page can therefore send requests to the API on behalf of the user. Documented as a residual risk. Full browser-based verification is in the testing console at http://localhost:3000."
+  }
+]

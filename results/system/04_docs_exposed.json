@@ -1,0 +1,12 @@
+{
+  "finding": "auto_docs_exposed",
+  "atlas": "AML.T0007",
+  "docs_status": 200,
+  "docs_length": 952,
+  "openapi_endpoints": [
+    "/health",
+    "/model-info",
+    "/predict"
+  ],
+  "notes": "FastAPI auto-generates /docs and /openapi.json. These are disabled in hardened mode but exposed on the vulnerable API. An attacker can map the entire API surface without any guesswork."
+}

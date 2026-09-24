@@ -1,0 +1,13 @@
+{
+  "finding": "verbose_error_traces",
+  "atlas": "AML.T0007",
+  "vulnerable": {
+    "status": 500,
+    "body": "{\"error\":\"cannot identify image file <_io.BytesIO object at 0x7611fdfa1a30>\",\"trace\":\"Traceback (most recent call last):\\n  File \\\"/srv/adapters/http.py\\\", line 53, in predict_endpoint\\n    prediction = serve_prediction(model, raw, client_ip, _log)\\n  File \\\"/srv/usecases/serve_prediction.py\\\", line 10, in serve_prediction\\n    noise = noise_score_from_bytes(image_bytes)\\n  File \\\"/srv/services/preprocessing.py\\\", line 24, in noise_score_from_bytes\\n    arr = np.array(Image.open(io.BytesIO(image_bytes)).convert(\\\"L\\\"), dtype=np.float32)\\n  File \\\"/usr/local/lib/python3.10/site-packages/PIL/Image.py\\\", line 3339, in open\\n    raise UnidentifiedImageError(msg)\\nPIL.UnidentifiedImageError: cannot identify image file <_io.BytesIO object at 0x7611fdfa1a30>\\n\"}"
+  },
+  "hardened": {
+    "status": 400,
+    "body": "{\"detail\":\"Invalid image\"}"
+  },
+  "notes": "Vulnerable returns a full stack trace with file paths and library versions. Hardened returns a generic error."
+}

@@ -1,0 +1,8 @@
+{
+  "finding": "cors_behavior",
+  "atlas": "AML.T0000",
+  "origin_sent": "http://localhost:3000",
+  "response_status": 405,
+  "access_control_allow_origin": "not set",
+  "notes": "The vulnerable API does not set CORS headers explicitly. FastAPI's default allows the browser to make requests from any origin. A malicious page can therefore send requests to the API on behalf of the user. Documented as a residual risk. Full browser-based verification is in the testing console at http://localhost:3000."
+}
