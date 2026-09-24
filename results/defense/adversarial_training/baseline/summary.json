@@ -1,0 +1,84 @@
+{
+  "target": "http://localhost:8000",
+  "eps": 0.03137254901960784,
+  "samples": [
+    {
+      "name": "cat_0",
+      "true_class": "cat",
+      "clean": "cat",
+      "fgsm": "airplane",
+      "pgd": "airplane",
+      "fgsm_success": true,
+      "pgd_success": true,
+      "fgsm_l_inf": 0.0313725508749485,
+      "pgd_l_inf": 0.0313725508749485
+    },
+    {
+      "name": "bird_0",
+      "true_class": "bird",
+      "clean": "bird",
+      "fgsm": "cat",
+      "pgd": "cat",
+      "fgsm_success": true,
+      "pgd_success": true,
+      "fgsm_l_inf": 0.0313725508749485,
+      "pgd_l_inf": 0.0313725508749485
+    },
+    {
+      "name": "airplane_0",
+      "true_class": "airplane",
+      "clean": "airplane",
+      "fgsm": "bird",
+      "pgd": "bird",
+      "fgsm_success": true,
+      "pgd_success": true,
+      "fgsm_l_inf": 0.0313725508749485,
+      "pgd_l_inf": 0.0313725508749485
+    }
+  ],
+  "alerts_after_attack": 2,
+  "epsilon_sweep": [
+    {
+      "eps": 0.0,
+      "clean_acc": 0.88,
+      "fgsm_acc": 0.88,
+      "pgd_acc": 0.88
+    },
+    {
+      "eps": 0.01,
+      "clean_acc": 0.88,
+      "fgsm_acc": 0.66,
+      "pgd_acc": 0.62
+    },
+    {
+      "eps": 0.02,
+      "clean_acc": 0.88,
+      "fgsm_acc": 0.46,
+      "pgd_acc": 0.35
+    },
+    {
+      "eps": 0.03,
+      "clean_acc": 0.88,
+      "fgsm_acc": 0.28,
+      "pgd_acc": 0.18
+    },
+    {
+      "eps": 0.05,
+      "clean_acc": 0.88,
+      "fgsm_acc": 0.15,
+      "pgd_acc": 0.05
+    },
+    {
+      "eps": 0.08,
+      "clean_acc": 0.88,
+      "fgsm_acc": 0.05,
+      "pgd_acc": 0.0
+    },
+    {
+      "eps": 0.1,
+      "clean_acc": 0.88,
+      "fgsm_acc": 0.02,
+      "pgd_acc": 0.0
+    }
+  ]
+}
