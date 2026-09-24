@@ -34,6 +34,7 @@ def parse_args():
     p = argparse.ArgumentParser()
     p.add_argument("--target", default="http://localhost:8000")
     p.add_argument("--api-key", default=None)
+    p.add_argument("--model-path", default="model/artifacts/baseline.pt")  
     p.add_argument("--eps", type=float, default=8/255)
     p.add_argument("--alpha", type=float, default=2/255)
     p.add_argument("--steps", type=int, default=40)
@@ -190,8 +191,8 @@ def main():
 
     model = SmallCNN()
     model.load_state_dict(
-        torch.load("model/artifacts/baseline.pt", map_location="cpu", weights_only=True)
-    )
+    torch.load(args.model_path, map_location="cpu", weights_only=True)
+)
     model.eval()
     print(f"Model loaded: {sum(p.numel() for p in model.parameters())} params")
     print(f"Target: {args.target}")
