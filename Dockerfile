@@ -22,6 +22,22 @@ RUN pip install --no-cache-dir --timeout 1200 \
 COPY requirements.txt .
 RUN pip install --no-cache-dir --timeout 1200 -r requirements.txt
 
+# COPY domain/ domain/
+# COPY services/ services/
+# COPY usecases/ usecases/
+# COPY adapters/ adapters/
+# COPY interfaces/ interfaces/
+# COPY defense/ defense/
+# COPY model/ model/
+
+# RUN mkdir -p /srv/logs /srv/results
+
+# # [VULN-06] Container runs as root.
+# # ATLAS: AML.T0000
+
+# EXPOSE 8000
+# CMD ["uvicorn", "interfaces.api_main:app", "--host", "0.0.0.0", "--port", "8000"]
+
 COPY domain/ domain/
 COPY services/ services/
 COPY usecases/ usecases/
@@ -30,10 +46,12 @@ COPY interfaces/ interfaces/
 COPY defense/ defense/
 COPY model/ model/
 
-RUN mkdir -p /srv/logs /srv/results
+# [VULN-06] FIXED: run as non-privileged user
+RUN useradd -m -u 1000 appuser \
+    && mkdir -p /srv/logs /srv/results \
+    && chown -R appuser:appuser /srv
 
-# [VULN-06] Container runs as root.
-# ATLAS: AML.T0000
+USER appuser
 
 EXPOSE 8000
 CMD ["uvicorn", "interfaces.api_main:app", "--host", "0.0.0.0", "--port", "8000"]
