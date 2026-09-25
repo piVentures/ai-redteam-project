@@ -1,0 +1,66 @@
+{
+  "target": "http://localhost:8001",
+  "samples_per_class": 50,
+  "total_members": 200,
+  "total_nonmembers": 200,
+  "member_mean_confidence": 0.8820999999999999,
+  "member_median_confidence": 0.96,
+  "nonmember_mean_confidence": 0.8569,
+  "nonmember_median_confidence": 0.91,
+  "results": [
+    {
+      "accuracy": 0.5375,
+      "majority_baseline": 0.5,
+      "threshold": 0.8,
+      "tp": 152,
+      "fp": 137,
+      "total_members": 200,
+      "total_nonmembers": 200
+    },
+    {
+      "accuracy": 0.555,
+      "majority_baseline": 0.5,
+      "threshold": 0.85,
+      "tp": 143,
+      "fp": 121,
+      "total_members": 200,
+      "total_nonmembers": 200
+    },
+    {
+      "accuracy": 0.555,
+      "majority_baseline": 0.5,
+      "threshold": 0.9,
+      "tp": 125,
+      "fp": 103,
+      "total_members": 200,
+      "total_nonmembers": 200
+    },
+    {
+      "accuracy": 0.5575,
+      "majority_baseline": 0.5,
+      "threshold": 0.95,
+      "tp": 105,
+      "fp": 82,
+      "total_members": 200,
+      "total_nonmembers": 200
+    },
+    {
+      "accuracy": 0.4925,
+      "majority_baseline": 0.5,
+      "threshold": 0.99,
+      "tp": 47,
+      "fp": 50,
+      "total_members": 200,
+      "total_nonmembers": 200
+    }
+  ],
+  "best": {
+    "accuracy": 0.5575,
+    "majority_baseline": 0.5,
+    "threshold": 0.95,
+    "tp": 105,
+    "fp": 82,
+    "total_members": 200,
+    "total_nonmembers": 200
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "target": "http://localhost:8000",
+  "samples_per_class": 50,
+  "total_members": 200,
+  "total_nonmembers": 200,
+  "member_mean_confidence": 0.950026657730341,
+  "member_median_confidence": 0.9956134855747223,
+  "nonmember_mean_confidence": 0.925664099752903,
+  "nonmember_median_confidence": 0.9886334836483002,
+  "results": [
+    {
+      "accuracy": 0.515,
+      "majority_baseline": 0.5,
+      "threshold": 0.8,
+      "tp": 182,
+      "fp": 176,
+      "total_members": 200,
+      "total_nonmembers": 200
+    },
+    {
+      "accuracy": 0.5225,
+      "majority_baseline": 0.5,
+      "threshold": 0.85,
+      "tp": 174,
+      "fp": 165,
+      "total_members": 200,
+      "total_nonmembers": 200
+    },
+    {
+      "accuracy": 0.5375,
+      "majority_baseline": 0.5,
+      "threshold": 0.9,
+      "tp": 162,
+      "fp": 147,
+      "total_members": 200,
+      "total_nonmembers": 200
+    },
+    {
+      "accuracy": 0.54,
+      "majority_baseline": 0.5,
+      "threshold": 0.95,
+      "tp": 147,
+      "fp": 131,
+      "total_members": 200,
+      "total_nonmembers": 200
+    },
+    {
+      "accuracy": 0.5425,
+      "majority_baseline": 0.5,
+      "threshold": 0.99,
+      "tp": 114,
+      "fp": 97,
+      "total_members": 200,
+      "total_nonmembers": 200
+    }
+  ],
+  "best": {
+    "accuracy": 0.5425,
+    "majority_baseline": 0.5,
+    "threshold": 0.99,
+    "tp": 114,
+    "fp": 97,
+    "total_members": 200,
+    "total_nonmembers": 200
+  }
+}
