@@ -22,9 +22,9 @@ docker compose ps --all
 echo ""
 echo "=== Health ==="
 check "vulnerable mode" "vulnerable" \
-    "$(curl -s localhost:8000/health | python -c 'import sys,json;print(json.load(sys.stdin)["mode"])')"
+    "$(curl -s localhost:8000/health | python3 -c 'import sys,json;print(json.load(sys.stdin)["mode"])')"
 check "hardened mode" "hardened" \
-    "$(curl -s localhost:8001/health | python -c 'import sys,json;print(json.load(sys.stdin)["mode"])')"
+    "$(curl -s localhost:8001/health | python3 -c 'import sys,json;print(json.load(sys.stdin)["mode"])')"
 
 echo ""
 echo "=== Docs ==="
@@ -48,7 +48,7 @@ check "api-hardened" "appuser" "$(docker compose exec -T api-hardened whoami)"
 echo ""
 echo "=== Alerts API ==="
 check "alerts JSON" "list" \
-    "$(curl -s localhost:8002/alerts | python -c 'import sys,json;print(type(json.load(sys.stdin)).__name__)')"
+    "$(curl -s localhost:8002/alerts | python3 -c 'import sys,json;print(type(json.load(sys.stdin)).__name__)')"
 
 echo ""
 echo "=== Memory limits ==="
