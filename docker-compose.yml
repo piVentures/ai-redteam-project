@@ -2,6 +2,8 @@ services:
   api-vuln:
     build: .
     container_name: redteam-api-vuln
+    mem_limit: 1g
+    cpus: 1.0
     environment:
       - SECURITY_MODE=vulnerable
       - MODEL_PATH=model/artifacts/baseline.pt
@@ -24,11 +26,13 @@ services:
   api-hardened:
     build: .
     container_name: redteam-api-hardened
+    mem_limit: 1g
+    cpus: 1.0
     environment:
       - SECURITY_MODE=hardened
       - MODEL_PATH=model/artifacts/baseline_robust.pt
       - LOG_DIR=logs
-      - API_KEY=dev-local-key-change-me
+      - API_KEY=${API_KEY:-dev-local-key-change-me}
       - PYTHONDONTWRITEBYTECODE=1
     ports:
       - "8001:8000"
@@ -48,6 +52,8 @@ services:
     container_name: redteam-detector
     command: ["python", "-m", "interfaces.detector_main"]
     working_dir: /srv
+    mem_limit: 256m
+    cpus: 0.5
     environment:
       - PREDICTIONS_LOG=logs/predictions.jsonl
       - ALERTS_LOG=results/alerts.jsonl
@@ -69,6 +75,8 @@ services:
     container_name: redteam-alerts-api
     command: ["uvicorn", "interfaces.alerts_main:app", "--host", "0.0.0.0", "--port", "8002"]
     working_dir: /srv
+    mem_limit: 128m
+    cpus: 0.5
     environment:
       - PYTHONDONTWRITEBYTECODE=1
     ports:

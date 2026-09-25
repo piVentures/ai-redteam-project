@@ -4,14 +4,49 @@ FastAPI app factory. The only place that knows about HTTP.
 import traceback
 import torch
 from fastapi import FastAPI, File, UploadFile, Request, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from domain.constants import CLASSES
 from usecases.serve_prediction import serve_prediction
 
 
-def create_app(model, security_mode: str, log_dir: str, model_path: str) -> FastAPI:
-    app = FastAPI(title="Image Classifier API", version="1.0")
+def create_app(model, security_mode, log_dir, model_path):
+    # Hardened mode: disable interactive docs and OpenAPI schema
+    if security_mode == "hardened":
+        docs_url = None
+        redoc_url = None
+        openapi_url = None
+    else:
+        docs_url = "/docs"
+        redoc_url = "/redoc"
+        openapi_url = "/openapi.json"
+
+    app = FastAPI(
+        title="Image Classifier API",
+        version="1.0",
+        docs_url=docs_url,
+        redoc_url=redoc_url,
+        openapi_url=openapi_url,
+    )
+
+    # CORS: restrictive in hardened mode, permissive in vulnerable mode
+    if security_mode == "hardened":
+        app.add_middleware(
+            CORSMiddleware,
+            allow_origins=["http://localhost:3000"],
+            allow_methods=["POST", "GET"],
+            allow_headers=["x-api-key", "content-type"],
+            allow_credentials=False,
+        )
+    else:
+        app.add_middleware(
+            CORSMiddleware,
+            allow_origins=["*"],
+            allow_methods=["*"],
+            allow_headers=["*"],
+            allow_credentials=False,
+        )
 
     def _log(event):
         from adapters.logging import log_event
