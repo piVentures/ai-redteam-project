@@ -91,3 +91,28 @@ services:
       - ./defense:/srv/defense:ro
     depends_on:
       - detector
+
+  telegram-notifier:
+    build:
+      context: .
+      dockerfile: Dockerfile.notifier
+    container_name: redteam-telegram-notifier
+    restart: unless-stopped
+    mem_limit: 64m
+    cpus: 0.25
+    logging:
+      driver: json-file
+      options:
+        max-size: "1m"
+        max-file: "2"
+    environment:
+      - ALERTS_LOG=results/alerts.jsonl
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN:-}
+      - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID:-}
+      - NOTIFIER_POLL_SECONDS=5
+      - NOTIFIER_BATCH_SECONDS=30
+    volumes:
+      - ./results:/srv/results:ro
+    working_dir: /srv
+    depends_on:
+      - detector

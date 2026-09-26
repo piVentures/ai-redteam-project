@@ -9,7 +9,6 @@ report/
 video/
 colab/
 data/
-scripts/
 docs/
 *.md
 !requirements.txt
