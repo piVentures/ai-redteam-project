@@ -50,6 +50,17 @@ echo "=== Alerts API ==="
 check "alerts JSON" "list" \
     "$(curl -s localhost:8002/alerts | python3 -c 'import sys,json;print(type(json.load(sys.stdin)).__name__)')"
 
+
+echo ""
+echo "=== Telegram notifier ==="
+NOTIFIER_STATE=$(docker compose ps --format json telegram-notifier 2>/dev/null \
+    | python3 -c 'import sys, json; d=json.load(sys.stdin); print(d.get("State",""))' 2>/dev/null || echo "")
+if [ "$NOTIFIER_STATE" = "running" ]; then
+    echo "  PASS  telegram-notifier running"
+else
+    echo "  WARN  telegram-notifier not running (state: $NOTIFIER_STATE)"
+fi
+
 echo ""
 echo "=== Memory limits ==="
 docker stats --no-stream --format "table {{.Name}}\t{{.MemUsage}}\t{{.MemPerc}}"

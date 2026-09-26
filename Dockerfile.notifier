@@ -1,0 +1,13 @@
+# Minimal image for the Telegram notifier.
+# Separate from the main Dockerfile so the ~2 GB Python image is not
+# inflated with curl/jq, and so the notifier has no Python dependency.
+FROM alpine:3.20
+
+# coreutils gives us a GNU-compatible `sed`, `wc`, and `date`.
+# busybox's versions have subtly different flags that break the script.
+RUN apk add --no-cache bash curl jq coreutils
+
+COPY scripts/notify.sh /usr/local/bin/notify.sh
+RUN chmod +x /usr/local/bin/notify.sh
+
+ENTRYPOINT ["/usr/local/bin/notify.sh"]
