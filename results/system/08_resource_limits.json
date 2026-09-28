@@ -1,0 +1,11 @@
+{
+  "finding": "resource_limits",
+  "atlas": "\u2014",
+  "status": "remediated",
+  "memory_limit_bytes": 1073741824,
+  "memory_limit_gib": 1.0,
+  "cpu_quota": 0,
+  "cpu_nanocpus": 1000000000,
+  "cpu_cores": 1.0,
+  "notes": "Memory limit: 1073741824 bytes (1.0 GiB). CPU allocation: 1.0 cores (via NanoCpus). Both are set in docker-compose.yml and enforced via cgroups. Docker Compose does not set CpuQuota, so that field reads 0 even when a CPU limit exists. The NanoCpus field is the authoritative CPU allocation."
+}

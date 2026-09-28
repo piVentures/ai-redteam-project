@@ -314,7 +314,8 @@ def finding_volume_mounts(out_dir):
 # ============================================================
 
 def finding_no_resource_limits(out_dir):
-    print("[8] No resource limits (DoS via exhaustion)")
+    """Check whether resource limits are set on the container."""
+    print("[8] Resource limits (DoS via exhaustion)")
 
     raw = sh("docker inspect redteam-api-vuln --format '{{json .HostConfig}}'")
     try:
@@ -324,25 +325,43 @@ def finding_no_resource_limits(out_dir):
 
     memory = host_config.get("Memory", 0)
     cpu_quota = host_config.get("CpuQuota", 0)
+    nano_cpus = host_config.get("NanoCpus", 0)
+
+    # NanoCpus is in nanocores (1e9 nanocores = 1 core).
+    cpu_cores = nano_cpus / 1e9 if nano_cpus else 0
+    memory_gib = round(memory / (1024 ** 3), 2) if memory else 0
+
+    limits_present = memory > 0 and (cpu_quota > 0 or nano_cpus > 0)
 
     evidence = {
-        "finding": "no_resource_limits",
+        "finding": "resource_limits",
         "atlas": "—",
-        "memory_limit": memory,
+        "status": "remediated" if limits_present else "present",
+        "memory_limit_bytes": memory,
+        "memory_limit_gib": memory_gib,
         "cpu_quota": cpu_quota,
-        "notes": "The container has no memory limit and no CPU quota. A "
-                 "malicious client can exhaust host resources by sending "
-                 "large or numerous requests, causing a denial of service "
-                 "for other containers or the host itself."
+        "cpu_nanocpus": nano_cpus,
+        "cpu_cores": cpu_cores,
+        "notes": (
+            f"Memory limit: {memory} bytes ({memory_gib} GiB). "
+            f"CPU allocation: {cpu_cores} cores (via NanoCpus). "
+            "Both are set in docker-compose.yml and enforced via cgroups. "
+            "Docker Compose does not set CpuQuota, so that field reads 0 "
+            "even when a CPU limit exists. The NanoCpus field is the "
+            "authoritative CPU allocation."
+        ) if limits_present else (
+            "No memory limit and no CPU allocation set. "
+            "The container can exhaust host resources."
+        )
     }
 
-    with open(os.path.join(out_dir, "08_no_resource_limits.json"), "w") as f:
+    with open(os.path.join(out_dir, "08_resource_limits.json"), "w") as f:
         json.dump(evidence, f, indent=2)
 
-    print(f"    Memory limit: {memory} bytes (0 = unlimited)")
-    print(f"    CPU quota: {cpu_quota}")
+    print(f"    Memory limit: {memory} bytes ({memory_gib} GiB)")
+    print(f"    CPU allocation: {cpu_cores} cores")
+    print(f"    Status: {'remediated' if limits_present else 'present'}")
     return evidence
-
 
 # ============================================================
 # Finding 9 — CORS behavior (documented, not tested via browser)
