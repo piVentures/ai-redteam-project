@@ -1,0 +1,12 @@
+{"rule": "mia_confidence_sweep", "atlas": "AML.T0025", "ip": "172.18.0.1", "ts": 1790595602.716679}
+{"rule": "extraction_volume", "atlas": "AML.T0024", "ip": "172.18.0.1", "count_last_60s": 41, "ts": 1790595603.2264094}
+{"rule": "extraction_volume", "atlas": "AML.T0024", "ip": "172.18.0.1", "count_last_60s": 985, "ts": 1790595663.3311174}
+{"rule": "mia_confidence_sweep", "atlas": "AML.T0025", "ip": "172.18.0.1", "ts": 1790595663.3313751}
+{"rule": "mia_confidence_sweep", "atlas": "AML.T0025", "ip": "172.18.0.1", "ts": 1790595896.1039693}
+{"rule": "extraction_volume", "atlas": "AML.T0024", "ip": "172.18.0.1", "count_last_60s": 41, "ts": 1790595896.605143}
+{"rule": "mia_confidence_sweep", "atlas": "AML.T0025", "ip": "172.18.0.1", "ts": 1790595956.7051237}
+{"rule": "extraction_volume", "atlas": "AML.T0024", "ip": "172.18.0.1", "count_last_60s": 998, "ts": 1790595956.705437}
+{"rule": "extraction_volume", "atlas": "AML.T0024", "ip": "172.18.0.1", "count_last_60s": 41, "ts": 1790597463.1597373}
+{"rule": "mia_confidence_sweep", "atlas": "AML.T0025", "ip": "172.18.0.1", "ts": 1790597463.1602368}
+{"rule": "extraction_volume", "atlas": "AML.T0024", "ip": "172.18.0.1", "count_last_60s": 800, "ts": 1790597523.261112}
+{"rule": "mia_confidence_sweep", "atlas": "AML.T0025", "ip": "172.18.0.1", "ts": 1790597524.764082}
