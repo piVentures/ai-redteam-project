@@ -1,13 +1,15 @@
-# Video Walkthrough
+## Video Walkthrough
 
-A narrated demonstration of the AI Red Team Assessment, recorded in
-Amharic against the live local Docker stack.
+A full narrated demonstration of the assessment, recorded against the
+live local Docker stack. The video shows the system verification, the
+three model attacks with their defenses, the nine system findings, and
+the live Telegram notification.also some explanation on how the system works using uml diagrams.
 
-**File:** `demo.mkv`  
-**Runtime:** 14:33 (recommend 2× playback for faster viewing)  
-**Language:** Amharic  
+[![AI Red Team Assessment — Video Demo](https://img.youtube.com/vi/Xo5dgfcREJs/maxresdefault.jpg)](https://youtu.be/Xo5dgfcREJs)
 
+**Duration:** 14:33 · **Language:** Amharic · **Recommended playback:** 2×
 
-The video shows the system verification, the three model attacks, the
-nine system findings, and the live Telegram notification. Every number
-on screen comes from a file in `results/`. Also it has some expalaination using uml diagrams.
+Every number on screen comes from a file in `results/`. The full stack
+reproduces from a fresh clone with `make up` and `bash scripts/verify.sh`.
+
+---
