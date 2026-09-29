@@ -10,3 +10,8 @@
 {"rule": "mia_confidence_sweep", "atlas": "AML.T0025", "ip": "172.18.0.1", "ts": 1790597463.1602368}
 {"rule": "extraction_volume", "atlas": "AML.T0024", "ip": "172.18.0.1", "count_last_60s": 800, "ts": 1790597523.261112}
 {"rule": "mia_confidence_sweep", "atlas": "AML.T0025", "ip": "172.18.0.1", "ts": 1790597524.764082}
+{"rule": "mia_confidence_sweep", "atlas": "AML.T0025", "ip": "172.18.0.1", "ts": 1790654226.8522637}
+{"rule": "extraction_volume", "atlas": "AML.T0024", "ip": "172.18.0.1", "count_last_60s": 41, "ts": 1790654228.3553975}
+{"rule": "extraction_volume", "atlas": "AML.T0024", "ip": "172.18.0.1", "count_last_60s": 633, "ts": 1790654288.4691617}
+{"rule": "mia_confidence_sweep", "atlas": "AML.T0025", "ip": "172.18.0.1", "ts": 1790654333.031091}
+{"rule": "extraction_volume", "atlas": "AML.T0024", "ip": "172.18.0.1", "count_last_60s": 438, "ts": 1790654348.0636444}
